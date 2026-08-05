@@ -52,12 +52,24 @@ EDIT_SCHEMA = {
                     "anchor": {
                         "type": "string",
                         "description": (
-                            "VERBATIM text copied from the supplied base-document "
-                            "page that this edit applies to. Must be at least 20 "
-                            "characters and must appear exactly once on the page. "
-                            "Never quote a bare list number such as '6.'."
+                            "VERBATIM text copied from the supplied base document "
+                            "that this edit applies to. It must appear EXACTLY ONCE "
+                            "in that text. Prefer a whole clause. If the text you "
+                            "need is short or repeated - a table cell like "
+                            "'$375,000', or a bare list number - keep the anchor "
+                            "short and put nearby unique text in `scope` instead of "
+                            "padding the anchor."
                         ),
-                        "minLength": 20,
+                        "minLength": 2,
+                    },
+                    "scope": {
+                        "type": "string",
+                        "description": (
+                            "Only needed when `anchor` is not unique on its own. "
+                            "Verbatim nearby text that IS unique - typically the "
+                            "row label of the table row the cell sits in, or the "
+                            "opening words of the paragraph. Used to disambiguate."
+                        ),
                     },
                     "replacement": {
                         "type": "string",
@@ -90,17 +102,36 @@ EDIT_SCHEMA = {
 }
 
 
-def anchor_is_safe(anchor: str) -> bool:
-    """Reject anchors that cannot be placed reliably.
+def resolve_anchor(anchor: str, base_text: str, scope: str = "") -> int | None:
+    """Character offset of `anchor` in `base_text`, or None if unplaceable.
 
-    Measured on the DIP motion: every ambiguous anchor in the 166-edit
-    ground truth was a short one, and 45 of them were bare list numbers
-    from a renumbering cascade.
+    The real requirement is UNIQUENESS, not length. An earlier version of this
+    rejected anchors under 20 characters, on the correct observation that short
+    anchors are usually ambiguous - but that made table cells inexpressible.
+    Six of the twelve edits missed on the first full run were cells like
+    "$375,000", including dollar figures in the DIP budget table. Scoping a
+    short anchor to unique nearby text places it exactly; excluding it loses
+    the edit silently, which is far worse.
     """
-    a = anchor.strip()
-    if len(a) < 20:
-        return False
-    # bare list number, e.g. "6." / "12."
-    if a.rstrip(".").isdigit():
-        return False
-    return True
+    a = (anchor or "").strip()
+    if not a:
+        return None
+    n = base_text.count(a)
+    if n == 1:
+        return base_text.index(a)
+    if n == 0:
+        return None
+    # ambiguous: narrow the search window using `scope`
+    s = (scope or "").strip()
+    if s and base_text.count(s) == 1:
+        at = base_text.index(s)
+        window = base_text[at : at + len(s) + 600]
+        if a in window:
+            return at + window.index(a)
+    return None
+
+
+def anchor_is_safe(anchor: str, base_text: str = "", scope: str = "") -> bool:
+    if not base_text:                      # no corpus to check against
+        return bool((anchor or "").strip())
+    return resolve_anchor(anchor, base_text, scope) is not None

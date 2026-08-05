@@ -19,6 +19,7 @@ from pathlib import Path
 from lxml import etree
 
 from . import wordxml
+from .schema import resolve_anchor
 from .models import Edit
 from .reconcile import minimal_span
 
@@ -195,7 +196,12 @@ def apply_edits(base_docx: str | Path, edits: list[Edit], out_docx: str | Path) 
                 and e.anchor in pristine[e.para_hint]:
             pi = e.para_hint
         else:
-            pi = next((i for i, t in enumerate(pristine) if e.anchor in t), None)
+            hits = [i for i, t in enumerate(pristine) if e.anchor in t]
+            if len(hits) == 1:
+                pi = hits[0]
+            elif len(hits) > 1 and e.scope:
+                # short/table anchor: disambiguate with the scoping text
+                pi = next((i for i in hits if e.scope in pristine[i]), None)
         if pi is None:
             failed.append(e)
             continue

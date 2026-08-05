@@ -15,6 +15,7 @@ class Edit:
     replacement: str
     evidence: str = ""
     xref: str | None = None
+    scope: str = ""            # unique nearby text, for short/table anchors
     confidence: str = "red"      # green | yellow | red - derived from agreement
     page: int = 0
     para_hint: int | None = None   # paragraph index when known
