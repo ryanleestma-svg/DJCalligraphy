@@ -40,11 +40,34 @@ class ScanPage:
     index: int          # 1-based sequence among *content* pages
     source_index: int   # 0-based index in the original PDF
     png: bytes
-    tiles: list[bytes] = None   # optional high-resolution horizontal bands
+    tiles: list[bytes] = None   # optional high-resolution grid tiles
+    backs: list[bytes] = None   # reverse sides he continued onto
 
     def images(self) -> list[bytes]:
-        """What to actually send: the bands if present, else the whole page."""
-        return self.tiles if self.tiles else [self.png]
+        """Front (or its tiles) followed by any continuation sheets."""
+        front = self.tiles if self.tiles else [self.png]
+        return front + (self.backs or [])
+
+    def note(self) -> str:
+        """Caption telling the reader what the images are."""
+        parts = []
+        if self.tiles:
+            parts.append(
+                f"The page front is supplied as {len(self.tiles)} overlapping tiles "
+                "at high magnification; a mark near a boundary appears twice - "
+                "report it ONCE."
+            )
+        if self.backs:
+            parts.append(
+                f"After the front there {'is' if len(self.backs)==1 else 'are'} "
+                f"{len(self.backs)} image(s) of the BACK of this same sheet. When he "
+                "runs out of margin he turns the sheet over and keeps writing, "
+                "drawing a line from the front to the back. Treat the back as a "
+                "CONTINUATION OF THIS PAGE, not as a page of its own: it holds the "
+                "text for carets and circled letters marked on the front. Match each "
+                "circled letter on the back to the same circled letter on the front."
+            )
+        return " ".join(parts)
 
 
 def _ink_fraction(png: bytes) -> float:
@@ -84,12 +107,24 @@ def _grid(page, cols: int, rows: int, overlap: float) -> list[bytes]:
     return out
 
 
+# A scanned side carrying ink but essentially no printed text is not a page of
+# its own: it is the BACK of the preceding sheet, which he turns over when the
+# margin runs out, drawing a line from front to back. His circled-letter
+# convention lives on exactly these sides - the marker on the front, the text on
+# the back. Attaching them to their front makes that a local match rather than a
+# document-wide search.
+CONTINUATION_MAX_TEXT = 500
+
+
 def render_scan(pdf_path: str | Path, dpi: int = 170, cols: int = 1,
                 rows: int = 1, overlap: float = 0.12) -> list[ScanPage]:
-    """Render the markup scan, dropping blank reverse sides.
+    """Render the markup scan.
 
-    cols/rows > 1 additionally renders each page as an overlapping grid of tiles
-    at much higher effective resolution; see VISION_LONG_EDGE.
+    Blank reverse sides are dropped. Reverse sides he has written on are
+    attached to the front of their own sheet as continuations.
+
+    cols/rows > 1 additionally renders each front as an overlapping grid of
+    tiles at much higher effective resolution; see VISION_LONG_EDGE.
     """
     doc = fitz.open(str(pdf_path))
     pages: list[ScanPage] = []
@@ -97,6 +132,10 @@ def render_scan(pdf_path: str | Path, dpi: int = 170, cols: int = 1,
     for i, page in enumerate(doc):
         png = page.get_pixmap(dpi=dpi).tobytes("png")
         if _ink_fraction(png) < BLANK_INK_FRACTION:
+            continue
+        printed = len(page.get_text().strip()) > CONTINUATION_MAX_TEXT
+        if not printed and pages:
+            pages[-1].backs = (pages[-1].backs or []) + [png]
             continue
         n += 1
         band = _grid(page, cols, rows, overlap) if (cols > 1 or rows > 1) else None

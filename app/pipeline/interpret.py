@@ -98,8 +98,8 @@ def _client() -> anthropic.Anthropic:
 
 
 def _call(page_png, base_text: str, glossary: str, lens: str,
-          context: str = "") -> list[dict]:
-    """page_png may be one PNG or a list of high-resolution bands of one page."""
+          context: str = "", note: str = "") -> list[dict]:
+    """page_png may be one PNG or several images belonging to ONE sheet."""
     imgs = page_png if isinstance(page_png, (list, tuple)) else [page_png]
     blocks = reference_blocks()
     blocks.append(
@@ -113,11 +113,8 @@ def _call(page_png, base_text: str, glossary: str, lens: str,
         blocks.append({"type": "text", "text": context, "cache_control": {"type": "ephemeral"}})
     if glossary:
         blocks.append({"type": "text", "text": "DEFINED TERMS ESTABLISHED EARLIER:\n" + glossary})
-    if len(imgs) > 1:
-        blocks.append({"type": "text", "text": (
-            f"The page is supplied as {len(imgs)} overlapping horizontal bands, "
-            "top to bottom, at high magnification. They overlap, so a mark near "
-            "a boundary appears twice - report it ONCE.")})
+    if note:
+        blocks.append({"type": "text", "text": note})
     for img in imgs:
         blocks.append(
             {
@@ -258,26 +255,26 @@ cannot tell what he wrote with reasonable certainty, return op `query` with a \
 """
 
 
-def _tiebreak(page_png: bytes, base_text: str, glossary: str, a_items, b_items,
-              context: str = ""):
+def _tiebreak(page_png, base_text: str, glossary: str, a_items, b_items,
+              context: str = "", note: str = ""):
     """Adjudicate one cluster. Also CONSOLIDATES: a cluster may hold several
     fragments from one reader, and the tiebreaker is asked for a single edit."""
     lens = TIEBREAK.format(
         a=json.dumps(a_items, ensure_ascii=False) if a_items else "(found no edit here)",
         b=json.dumps(b_items, ensure_ascii=False) if b_items else "(found no edit here)",
     )
-    edits, _ = _call(page_png, base_text, glossary, lens, context)
+    edits, _ = _call(page_png, base_text, glossary, lens, context, note)
     # The tiebreaker may legitimately split a cluster that holds two marks,
     # so take everything it returns rather than only the first edit.
     return [(e, "red" if e.get("op") == "query" else "yellow") for e in edits]
 
 
-def read_page(page_png: bytes, base_text: str, glossary: str, page_no: int,
-              context: str = "") -> tuple[list[Edit], list[dict]]:
+def read_page(page_png, base_text: str, glossary: str, page_no: int,
+              context: str = "", note: str = "") -> tuple[list[Edit], list[dict]]:
     # The two readers are independent by construction, so run them together.
     with ThreadPoolExecutor(max_workers=2) as pool:
-        fa = pool.submit(_call, page_png, base_text, glossary, READER_LENS["A"], context)
-        fb = pool.submit(_call, page_png, base_text, glossary, READER_LENS["B"], context)
+        fa = pool.submit(_call, page_png, base_text, glossary, READER_LENS["A"], context, note)
+        fb = pool.submit(_call, page_png, base_text, glossary, READER_LENS["B"], context, note)
         a_edits, a_terms = fa.result()
         b_edits, b_terms = fb.result()
 
@@ -308,7 +305,7 @@ def read_page(page_png: bytes, base_text: str, glossary: str, page_no: int,
     if contested:
         with ThreadPoolExecutor(max_workers=6) as pool:
             futures = [
-                pool.submit(_tiebreak, page_png, base_text, glossary, a, b, context)
+                pool.submit(_tiebreak, page_png, base_text, glossary, a, b, context, note)
                 for a, b in contested
             ]
             for f in futures:

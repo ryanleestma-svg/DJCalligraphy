@@ -91,7 +91,8 @@ def read_document(pages, base_text: str, progress=None) -> tuple[list[Edit], lis
                     },
                 }
             )
-        content.append({"type": "text", "text": PAGE.format(n=i, total=total)})
+        note = p.note()
+        content.append({"type": "text", "text": (note + "\n\n" if note else "") + PAGE.format(n=i, total=total)})
         if i > 1:
             messages.append({"role": "user", "content": content})
         else:

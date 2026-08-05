@@ -42,7 +42,8 @@ def process(
     for i, page in enumerate(pages, 1):
         progress(f"Reading page {i} of {len(pages)}", 0.05 + 0.75 * i / len(pages))
         gloss_text = "\n".join(f'{g["term"]} = {g["means"]}' for g in glossary)
-        edits, terms = read_page(page.png, base_text, gloss_text, i)
+        edits, terms = read_page(page.images(), base_text, gloss_text, i,
+                                 note=page.note())
         all_edits.extend(edits)
         # Defined terms propagate forward: an edit on page 1 can change how a
         # later page must be read (e.g. "Condos" -> the "Condo Building 1").
