@@ -69,8 +69,18 @@ do not confirm.
 """
 
 
-def _verify_one(page_png: bytes, base_text: str, e: Edit) -> tuple[Edit, str]:
+def _verify_one(page_png: bytes, base_text: str, e: Edit) -> tuple[Edit, str, str]:
     blocks = reference_blocks()
+    # The verifier MUST see the printed text it is judging against. Without it
+    # the model can only guess at what a replacement should say, and its
+    # "corrections" made the document measurably worse (0.8532 -> 0.7105).
+    blocks.append(
+        {
+            "type": "text",
+            "text": "BASE DOCUMENT (the unmarked draft, full text):\n\n" + base_text,
+            "cache_control": {"type": "ephemeral"},
+        }
+    )
     blocks.append(
         {
             "type": "image",
@@ -99,16 +109,12 @@ def _verify_one(page_png: bytes, base_text: str, e: Edit) -> tuple[Edit, str]:
             messages=[{"role": "user", "content": blocks}],
         )
     except anthropic.APIError:
-        return e, "error"
+        return e, "error", ""
     for b in resp.content:
         if b.type == "tool_use":
             v = b.input
-            s = v.get("supported", "no")
-            if s == "partly" and v.get("corrected"):
-                e.replacement = v["corrected"]
-                e.confidence = "yellow" if e.confidence == "green" else e.confidence
-            return e, s
-    return e, "no"
+            return e, v.get("supported", "no"), v.get("corrected", "") or ""
+    return e, "no", ""
 
 
 def verify(edits: list[Edit], pages: dict[int, bytes], base_text: str,
@@ -117,7 +123,7 @@ def verify(edits: list[Edit], pages: dict[int, bytes], base_text: str,
     jobs = [e for e in edits if e.op not in ("query", "split_para", "insert_para")]
     passthrough = [e for e in edits if e not in jobs]
 
-    results: list[tuple[Edit, str]] = []
+    results: list[tuple[Edit, str, str]] = []
     with ThreadPoolExecutor(max_workers=max_workers) as pool:
         futures = [
             pool.submit(_verify_one, pages[e.page], base_text, e)
@@ -129,8 +135,23 @@ def verify(edits: list[Edit], pages: dict[int, bytes], base_text: str,
 
     counts = {"yes": 0, "partly": 0, "no": 0, "error": 0}
     kept = []
-    for e, verdict in results:
+    for e, verdict, corrected in results:
         counts[verdict] = counts.get(verdict, 0) + 1
-        if verdict in ("yes", "partly", "error"):
-            kept.append(e)
+        if verdict == "no":
+            continue                      # refuted - drop it
+        if verdict == "partly":
+            # Flag rather than rewrite. A correction that disagrees with the
+            # readers is not automatically better than what they agreed on;
+            # colouring it red puts it in front of the reviewer instead.
+            e.confidence = "red"
+        kept.append(e)
     return kept + passthrough, counts
+
+
+def verdicts_only(edits, pages, base_text, max_workers: int = 8):
+    """Verify without mutating - returns [(edit, verdict, corrected)]."""
+    jobs = [e for e in edits if e.op not in ("query", "split_para", "insert_para")]
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+        futures = [pool.submit(_verify_one, pages[e.page], base_text, e)
+                   for e in jobs if e.page in pages]
+        return [f.result() for f in futures]
