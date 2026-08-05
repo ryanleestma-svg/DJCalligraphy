@@ -14,7 +14,16 @@ from PIL import Image
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 
 # A duplex scan of a single-sided document yields a blank image for every
-# reverse side. Observed on the DIP motion: 56 scanned images for 28 pages.
+# reverse side. Observed on the DIP motion: 56 images for a 28-page document.
+#
+# Filter on INK, never on the text layer. Three "blank" reverse sides carried
+# no extractable text but were covered in red pen: one held a footnote body
+# (his "FN" mark) and one held the payloads for two circled cross-references
+# (his (A)/(B) convention). Dropping pages with no text would silently discard
+# the content of those insertions.
+#
+# The two populations separate cleanly by two orders of magnitude:
+#   truly blank  <= 0.0001     handwriting-only  >= 0.02
 BLANK_INK_FRACTION = 0.002
 
 

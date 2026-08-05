@@ -17,6 +17,7 @@ import difflib
 import json
 import os
 import re
+from concurrent.futures import ThreadPoolExecutor
 
 import anthropic
 
@@ -24,7 +25,7 @@ from .models import Edit
 from .reference import reference_blocks
 from .schema import EDIT_SCHEMA, anchor_is_safe
 
-MODEL = os.environ.get("MARKUP_MODEL", "claude-opus-4-6")
+MODEL = os.environ.get("MARKUP_MODEL", "claude-opus-5")
 MAX_TOKENS = 8000
 
 TOOL = {
@@ -161,8 +162,12 @@ def _tiebreak(page_png: bytes, base_text: str, glossary: str, a, b) -> tuple[dic
 
 
 def read_page(page_png: bytes, base_text: str, glossary: str, page_no: int) -> tuple[list[Edit], list[dict]]:
-    a_edits, a_terms = _call(page_png, base_text, glossary, READER_LENS["A"])
-    b_edits, b_terms = _call(page_png, base_text, glossary, READER_LENS["B"])
+    # The two readers are independent by construction, so run them together.
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        fa = pool.submit(_call, page_png, base_text, glossary, READER_LENS["A"])
+        fb = pool.submit(_call, page_png, base_text, glossary, READER_LENS["B"])
+        a_edits, a_terms = fa.result()
+        b_edits, b_terms = fb.result()
 
     out: list[Edit] = []
     for ea, eb in _pair(a_edits, b_edits):
