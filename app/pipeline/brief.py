@@ -35,11 +35,23 @@ DOCUMENT:
 """
 
 
-def build_brief(base_text: str, max_tokens: int = 3000) -> str:
+def build_brief(base_text: str, max_tokens: int = 16000) -> str:
+    """Build the brief. Raises if the model returned no prose.
+
+    max_tokens must leave room for BOTH reasoning and the answer. At 3000 the
+    entire budget was consumed by a thinking block, the response carried no text
+    block at all, and the brief came back as a bare header - which silently
+    turned an experimental arm into a duplicate of its control.
+    """
     resp = _client().messages.create(
         model=MODEL,
         max_tokens=max_tokens,
         messages=[{"role": "user", "content": PROMPT.format(text=base_text)}],
     )
-    body = "".join(b.text for b in resp.content if b.type == "text")
+    body = "".join(b.text for b in resp.content if b.type == "text").strip()
+    if not body:
+        raise RuntimeError(
+            f"document brief came back empty (stop_reason={resp.stop_reason}, "
+            f"blocks={[b.type for b in resp.content]}); raise max_tokens"
+        )
     return "UNDERSTANDING OF THIS DOCUMENT (built by reading it in full):\n\n" + body
