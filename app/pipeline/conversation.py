@@ -24,6 +24,14 @@ import base64
 
 from concurrent.futures import ThreadPoolExecutor
 
+# Page images accumulate: 28 pages of base64 is roughly 40 MB and the request is
+# rejected outright (HTTP 413). Once a page has been read its pixels have served
+# their purpose - the edits and the reasoning about them stay in the thread, so
+# the continuity that makes a conversation better than isolated calls survives.
+# Only the most recent pages keep their images, as a mark near a page break may
+# still need looking at.
+KEEP_IMAGES_FOR_LAST = 2
+
 from .interpret import (
     MODEL, TOOL, _call, _client, _cluster, _sane_edits, _sane_terms, _sim,
 )
@@ -66,6 +74,32 @@ span as it should end up. One edit per physical mark.
 """
 
 
+def _drop_old_images(messages, keep_last: int = 2) -> None:
+    """Replace page images in older turns with a placeholder, in place.
+
+    The reference sheets in the opening turn are never dropped - they are the
+    handwriting key and are needed for every page.
+    """
+    page_turns = [
+        m for m in messages[1:]
+        if m["role"] == "user" and isinstance(m.get("content"), list)
+        and any(b.get("type") == "image" for b in m["content"] if isinstance(b, dict))
+    ]
+    for m in page_turns[:-keep_last] if keep_last else page_turns:
+        kept = []
+        dropped = 0
+        for b in m["content"]:
+            if isinstance(b, dict) and b.get("type") == "image":
+                dropped += 1
+                continue
+            kept.append(b)
+        if dropped:
+            kept.insert(0, {"type": "text",
+                            "text": f"[{dropped} page image(s) already read; "
+                                    "edits from them are recorded above]"})
+        m["content"] = kept
+
+
 def read_document(pages, base_text: str, progress=None, lens: str = "",
                   label: str = "conv") -> tuple[list[Edit], list[dict]]:
     """Walk every page in a single accumulating conversation."""
@@ -104,6 +138,7 @@ def read_document(pages, base_text: str, progress=None, lens: str = "",
         else:
             messages[0]["content"].extend(content)
 
+        _drop_old_images(messages, keep_last=KEEP_IMAGES_FOR_LAST)
         resp = client.messages.create(
             model=MODEL,
             max_tokens=8000,
