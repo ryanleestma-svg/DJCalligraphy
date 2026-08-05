@@ -1,0 +1,1451 @@
+[
+ {
+  "para": 36,
+  "op": "replace",
+  "old": "Adelaide Pointe Building 1, LLC, Waterland Battle Creek, LLC,",
+  "new": "Adelaide Pointe Building 1, LLC (the \u201cCondo Building 1\u201d), Waterland Battle Creek, LLC,",
+  "at": 91,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 36,
+  "op": "replace",
+  "old": "respectfully move this Court, pursuant to",
+  "new": "respectfully move pursuant to",
+  "at": 326,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 36,
+  "op": "replace",
+  "old": "507(b) of title 11 of the United States Code",
+  "new": "507(b) of the United States Code",
+  "at": 437,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 36,
+  "op": "replace",
+  "old": "section 364(d), on the terms of the financing commitment",
+  "new": "section 364(d), under the terms of the financing commitment",
+  "at": 1008,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 36,
+  "op": "replace",
+  "old": "issued by 364 Capital, LLC dated July 7, 2026",
+  "new": "issued by 364 Capital, LLC (the \u201cDIP Lender\u201d) dated July 7, 2026",
+  "at": 1065,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 36,
+  "op": "replace",
+  "old": "(the \u201cCommitment\u201d), a copy of which is attached hereto as Exhibit A.",
+  "new": "(the \u201cCommitment\u201d), attached as Exhibit A.",
+  "at": 1123,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "\u201cDIP Lender\u201d), on the terms of the Commitment and",
+  "new": "\u201cDIP Lender\u201d), on the terms set forth in the Commitment and",
+  "at": 226,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "the line-item budget attached to the Commitment as its Exhibit A",
+  "new": "the line-item budget to be utilized attached to the Commitment as Exhibit A",
+  "at": 276,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "The DIP Loan funds four categories of expenditures identified line-by-line",
+  "new": "The DIP Loan funds expenditures in the categories identified line-by-line",
+  "at": 357,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "(i) professional and administrative expenses, including the Chief Restructuring Officer",
+  "new": "(i) proposed professional and administrative expenses, including the compensation sought by the Chief Restructuring Officer",
+  "at": 447,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "($180,000), critical-vendor and EGLE site-assessment work by Edgewater Resources",
+  "new": "($180,000), required critical-vendor and EGLE site-assessment work to be done by Edgewater Resources",
+  "at": 551,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "and Soils and Structures, claims-agent, appraisal, and tax and accounting services",
+  "new": "and Soils and Structures, appraisal services, tax and accounting services",
+  "at": 632,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "United States Trustee fees, and counsel for the Debtors and the DIP Lender;",
+  "new": "United States Trustee fees, and the accruing legal fees and administrative claim of counsel for the Debtors as well as all the attorneys\u2019 fees incurred or to be incurred by counsel for the DIP Lender;",
+  "at": 734,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "34 unsold condominium units in Building 1, together with the condominium pool",
+  "new": "34 unsold condominium units in Condo Building 1, together with the required amenities as the condominium pool",
+  "at": 873,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "the engineered balcony remediation ($25,000);",
+  "new": "the engineered balcony remediation (estimated by the Debtors and the CRO to be $25,000);",
+  "at": 1002,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "estimated closing costs, and a contingency; and (iv)",
+  "new": "estimated closing costs, and a contingency reserve; and (iv)",
+  "at": 1137,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "$5,640,500 of DIP Lender fees and interest reserves",
+  "new": "$5,640,500 of DIP Lender origination fees and interest reserves",
+  "at": 1204,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "interest reserve dedicated to servicing the Debtors\u2019 obligations",
+  "new": "interest reserve dedicated to any debt service on the Debtors\u2019 obligations",
+  "at": 1280,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "(\u201cIBCP\u201d) during these cases and an estimated thirty-month",
+  "new": "(\u201cIBCP\u201d) during these cases that the Court may determine appropriate as adequate protection, and an estimated thirty-month",
+  "at": 1371,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "The DIP Loan is a completion facility: it funds",
+  "new": "The DIP Loan is an all purpose completion facility that funds",
+  "at": 1470,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 38,
+  "op": "replace",
+  "old": "the single most valuable unfinished asset in these estates, and the debt-service reserves that carry the senior lender and the DIP Lender through plan confirmation and the condominium sellout.",
+  "new": "the single most valuable unfinished asset (Condo Building 1), and provides the debt-service reserves that would provide protection to the securing lender and the DIP Lender through plan confirmation and the condominium sellout and/or adequate protection.",
+  "at": 1582,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 39,
+  "op": "replace",
+  "old": "cash reserves were depleted during the pre-petition state-court receivership, and the receivership transition has compressed",
+  "new": "cash reserves were depleted by the IBCP account sweep prior to and during the pre-petition state-court receivership, and the imposition of the receivership transition compressed",
+  "at": 93,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 39,
+  "op": "replace",
+  "old": "available liquidity at the exact moment when statutory deadlines",
+  "new": "available liquidity precisely when statutory deadlines",
+  "at": 231,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 39,
+  "op": "replace",
+  "old": "completion of the Building 1 condominium units, and the carry on the Debtors\u2019 senior secured debt require predictable funding.",
+  "new": "completion of the Condo Building 1 condominium units, and the debt service carry on the Debtors\u2019 secured debt requirements require predictable and stable funding or any adequate protection.",
+  "at": 321,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 39,
+  "op": "replace",
+  "old": "(or will shortly consider), complete and monetize the 34 unsold condominium units that constitute the single largest source of distributable value in these estates, or service",
+  "new": "(or will shortly be asked to consider), whose services will be necessary and essential to complete and monetize the 34 unsold condominium units, or service",
+  "at": 567,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 39,
+  "op": "delete",
+  "old": " Critically, the Debtors first offered this funding opportunity to IBCP, and IBCP was unwilling to fund the Budget.",
+  "new": "",
+  "at": 877,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 40,
+  "op": "replace",
+  "old": "negotiations and a marketing process in which the Debtors solicited interest",
+  "new": "negotiations and a process in which the Debtors solicited interest",
+  "at": 122,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 40,
+  "op": "replace",
+  "old": "LLC and its Managing Member, Renzo Renzi",
+  "new": "LLC, and its Managing Member, Renzo Renzi",
+  "at": 381,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 40,
+  "op": "replace",
+  "old": "within the market range for comparable priming-lien DIP facilities.",
+  "new": "within the market range for comparable or business priming-lien DIP facilities.",
+  "at": 538,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 40,
+  "op": "replace",
+  "old": "specified pre-petition collateral securing the obligations of IBCP \u2014 the real property located at",
+  "new": "specified pre-petition collateral that currently secures certain of the Debtors\u2019 obligations to IBCP \u2014 the real property located at",
+  "at": 748,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 40,
+  "op": "replace",
+  "old": "1204 West Western Avenue, 901 Adelaide Circle, and 400 Adelaide Circle, Muskegon, Michigan, together with vacant land",
+  "new": "1204 West Western Avenue (warehouses), 901 Adelaide Circle (Condo Building 1), and 400 Adelaide Circle (boater services building), Muskegon, Michigan, together with vacant land",
+  "at": 846,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 40,
+  "op": "replace",
+  "old": "(the Adelaide Pointe warehouse, boater services, and Building 1 condominium components), and the Borrowers\u2019",
+  "new": "(the warehouse, boater services building, and Condo Building 1 condominium components of the Adelaide Pointe Marina complex, all of which are integrated), and the Borrowers\u2019",
+  "at": 1023,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 40,
+  "op": "replace",
+  "old": "Neither Hall Street, LLC nor Waterland Commerce, LLC is a Borrower",
+  "new": "Neither Leestma Management, LLC nor Waterland Commerce, LLC is a Borrower",
+  "at": 1618,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 41,
+  "op": "insert_para",
+  "old": "",
+  "new": "4.\tPerhaps most critically, the DIP Loan provides funds that are necessary to address the needs, requirements and concerns of the Condo Building 1 homeowners association (the \u201cHOA\u201d), a very active participant in these Chapter 11 Cases. One of the basic assumptions made by the Debtors in establishing that the DIP Loan actually provides adequate protection to IBCP is that the DIP Loan will allow the completion of the condominium units in Condo Building 1 to allow the sale of those units to track with the pre-receivership sale trajectory in order to provide the basis for a valuation that provides a more than ample equity cushion to IBCP.",
+  "at": 0,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 41,
+  "op": "replace",
+  "old": "4.",
+  "new": "5.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 41,
+  "op": "replace",
+  "old": "The relief requested herein is consistent with, and addresses the corresponding items in, the Interim Settlement Term Sheet",
+  "new": "The relief requested herein is consistent with the Interim Settlement Term Sheet",
+  "at": 2,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 41,
+  "op": "replace",
+  "old": "before the Honorable Jacob A. Brown and approved by this Court under Federal Rule of Bankruptcy Procedure 9019 (respectively,",
+  "new": "before the Honorable Jacob A. Brown, recently approved by this Court (respectively,",
+  "at": 197,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 42,
+  "op": "replace",
+  "old": "5.",
+  "new": "6.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 42,
+  "op": "replace",
+  "old": "IBCP is adequately protected in the priming transaction by an overwhelming equity cushion. The protective elements are summarized in the table below and developed at length in Part VII (Adequate Protection) of this Motion:",
+  "new": "IBCP\u2019s interest is adequately protected in the proposed transaction by a very substantial equity cushion. The elements of adequate protection are summarized in the table below and discussed in detail in Part VII (Adequate Protection) of this Motion. The table provides the Court with a comparison of the existing IBCP debt, the pre-stabilized, pre-receivership valuations of the IBCP collateral prior to the enhancements and stabilization provided by the DIP Loan, and the resulting cushions that would provide IBCP with adequate protection:",
+  "at": 2,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 44,
+  "op": "replace",
+  "old": "IBCP Loan",
+  "new": "IBCP Collateral",
+  "at": 0,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 45,
+  "op": "replace",
+  "old": "IBCP Direct Exposure (post-USDA guaranty)",
+  "new": "IBCP Debt Amount",
+  "at": 0,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 46,
+  "op": "replace",
+  "old": "Collateral Value Available to IBCP",
+  "new": "Collateral Value Available to IBCP After DIP Loan Enhancements, Completion and Stabilization",
+  "at": 0,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 49,
+  "op": "replace",
+  "old": "No USDA guaranty (100% IBCP exposure). Conservative as-complete value",
+  "new": "Conservative as-complete value",
+  "at": 0,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 49,
+  "op": "replace",
+  "old": "current 2024 appraisal value reflects pre-completion stabilization.",
+  "new": "current IBCP valuation reflects pre-completion.",
+  "at": 100,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 51,
+  "op": "replace",
+  "old": "$1,975,000",
+  "new": "$7,900,000",
+  "at": 0,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 54,
+  "op": "replace",
+  "old": "$375,000",
+  "new": "$1,500,000",
+  "at": 0,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 57,
+  "op": "replace",
+  "old": "$837,500",
+  "new": "$3,350,000",
+  "at": 0,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 60,
+  "op": "replace",
+  "old": "$112,500",
+  "new": "$750,000",
+  "at": 0,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 66,
+  "op": "replace",
+  "old": "$17,700,000",
+  "new": "$23,800,000",
+  "at": 0,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 69,
+  "op": "replace",
+  "old": "6.",
+  "new": "7.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 69,
+  "op": "replace",
+  "old": "in each case stating that IBCP is \u201cappropriately reserved",
+  "new": "in each case IBCP stated that it is \u201cappropriately reserved",
+  "at": 406,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 69,
+  "op": "replace",
+  "old": "$29.7 million face balance IBCP asserts",
+  "new": "$29.7 million debt balance IBCP asserts",
+  "at": 559,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 69,
+  "op": "replace",
+  "old": "The arithmetic difference reflects the U.S. Department of Agriculture\u2019s Business and Industry guaranty",
+  "new": "The arithmetic difference reflects the fact that in its reporting, IBCP adopted the U.S. Department of Agriculture\u2019s Business and Industry guaranty guidelines",
+  "at": 614,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 69,
+  "op": "replace",
+  "old": "the loss reserves IBCP has already taken. Even on IBCP\u2019s own publicly disclosed view, IBCP\u2019s actual interest in the collateral is materially less than its asserted face balance, and the proposed priming of up to $12,074,869 \u2014 a facility that dedicates",
+  "new": "the loss reserves IBCP had already taken. Simply stated, the proposed priming of up to $12,074,869 that dedicates",
+  "at": 837,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 69,
+  "op": "replace",
+  "old": "leaves IBCP with an equity cushion well in excess of its entire direct exposure.",
+  "new": "leaves IBCP with an equity cushion well in excess of its direct exposure. The table is a simple illustration of how a DIP Facility provides sufficient adequate protection and stabilization.",
+  "at": 1175,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 70,
+  "op": "replace",
+  "old": "7.",
+  "new": "8.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 70,
+  "op": "replace",
+  "old": "including each of the Debtors\u2019 pre-petition secured creditors.",
+  "new": "including each of the Debtors\u2019 pre-petition secured creditors, which provides sufficient adequate protection.",
+  "at": 320,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 72,
+  "op": "replace",
+  "old": "8.",
+  "new": "9.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 73,
+  "op": "replace",
+  "old": "9.",
+  "new": "10.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 74,
+  "op": "replace",
+  "old": "III. BACKGROUND",
+  "new": "III. FACTUAL BACKGROUND",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 76,
+  "op": "replace",
+  "old": "10.",
+  "new": "11.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 77,
+  "op": "replace",
+  "old": "11.",
+  "new": "12.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 79,
+  "op": "replace",
+  "old": "12.",
+  "new": "13.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 79,
+  "op": "replace",
+  "old": "The Receiver\u2019s administration consumed substantial cash in receiver fees, professional fees, and operating costs",
+  "new": "The Receivership consumed substantial cash in receiver fees, professional fees, and operating costs and for some time thereafter",
+  "at": 157,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 79,
+  "op": "replace",
+  "old": " that the Debtors believe were not incurred to maximize estate value but rather to advance the litigation posture of the Debtors\u2019 largest secured creditor.",
+  "new": ". The timing of the Receivership was inopportune at best.",
+  "at": 269,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 79,
+  "op": "replace",
+  "old": "the cash flow from those operations was taken by IBCP and the Receiver pre-petition",
+  "new": "the cash flow from those operations was swept by IBCP and diverted to the Receiver pre-petition",
+  "at": 774,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 79,
+  "op": "replace",
+  "old": "the Receiver has represented unrestricted cash on hand",
+  "new": "the Receiver has reported unrestricted cash on hand",
+  "at": 923,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 79,
+  "op": "replace",
+  "old": "IBCP also abused the cash management system, sweeping operating cash to satisfy its own institutional preferences while failing to pay other secured creditors, vendors, and operational counterparties whose cooperation is necessary",
+  "new": "IBCP swept operating cash through the Receivership to satisfy its own purposes while failing to recognize or accommodate the interests of secured creditors, vendors, and operational resources whose cooperation is necessary",
+  "at": 1066,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 79,
+  "op": "replace",
+  "old": "a working-capital trough that no amount of pre-petition cash on hand can bridge.",
+  "new": "a working-capital deficit.",
+  "at": 1442,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 79,
+  "op": "replace",
+  "old": "The damage extends to the Debtors\u2019 principal personally: during the receivership, the Receiver and IBCP collected and controlled the enterprise\u2019s cash yet refused to pay equipment and vehicle obligations",
+  "new": "Particularly given that during the receivership, the Receiver and IBCP collected and controlled the enterprise\u2019s cash yet did not routinely pay equipment and vehicle operational obligations",
+  "at": 1523,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 79,
+  "op": "replace",
+  "old": " \u2014 that Ryan M. Leestma had personally guaranteed, and refused to compensate Mr. Leestma himself, causing late payments to Mr. Leestma\u2019s personal secured creditors and impairing the personal credit that would otherwise support conventional, sponsor-guaranteed financing. That impairment is a direct input to the structure of the DIP Loan: as described in Parts IV and VI below,",
+  "new": ". As described in Parts IV and VI below,",
+  "at": 1794,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 80,
+  "op": "replace",
+  "old": "13.",
+  "new": "14.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 80,
+  "op": "replace",
+  "old": "The consequences of that liquidity trough are now concrete and quantified in the Budget.",
+  "new": "The impact of that liquidity deficit is now quantified in the Budget.",
+  "at": 3,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 80,
+  "op": "replace",
+  "old": "the estates\u2019 single largest source of distributable value",
+  "new": "the single largest source of distributable value due to the damage that IBCP caused to Mr. Leestma\u2019s personal credit and depletion of his own resources",
+  "at": 140,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 80,
+  "op": "replace",
+  "old": "the Chief Restructuring Officer, the claims agent, appraisers, tax and accounting professionals, and counsel \u2014 must be funded",
+  "new": "the newly agreed upon Chief Restructuring Officer, appraisers, tax and accounting professionals, and all counsel \u2014 must be funded",
+  "at": 685,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 81,
+  "op": "replace",
+  "old": "14.",
+  "new": "15.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 81,
+  "op": "replace",
+  "old": "The Debtors\u2019 ability to pay these obligations as they come due, rather than allow them to accumulate as unsecured administrative claims subject to dispute, is what allows estate professionals and the proposed CRO to remain engaged in the Debtors\u2019 reorganization. The DIP Loan provides precisely that bridge.",
+  "new": "The proposed DIP Loan will provide liquidity for the Debtors to pay these obligations as they come due, rather than allow them to accumulate as unsecured administrative claims, which allows estate professionals and the proposed CRO, and Debtors\u2019 counsel who has long exhausted their original retainer, to remain engaged in the Debtors\u2019 reorganization.",
+  "at": 174,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 83,
+  "op": "replace",
+  "old": "15.",
+  "new": "16.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 83,
+  "op": "replace",
+  "old": "have revised through proposed edits and which is attached hereto, together with its Budget, as Exhibit A.",
+  "new": "have revised through proposed edits and attached hereto, together with the Budget, as Exhibit A.",
+  "at": 81,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 83,
+  "op": "replace",
+  "old": "to fund the completion of the Building 1 condominium units and the IBCP interest reserve described below.",
+  "new": "to fund the completion of the Condo Building 1 condominium units and provides the IBCP interest reserve.",
+  "at": 331,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 83,
+  "op": "replace",
+  "old": "that the Borrowers file with this Court a motion requesting approval of the DIP Loan and the lien priorities described in the Commitment, with a copy",
+  "new": "that the Borrowers file a motion requesting approval of the DIP Loan, with a copy",
+  "at": 510,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 83,
+  "op": "replace",
+  "old": "the Commitment \u2014 there is no interim draw.",
+  "new": "the Commitment. The Debtors were, unfortunately, unable to negotiate any interim draw to provide some relief to the estate professionals.",
+  "at": 891,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 84,
+  "op": "replace",
+  "old": "16.",
+  "new": "17.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 85,
+  "op": "replace",
+  "old": "17.",
+  "new": "18.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 85,
+  "op": "replace",
+  "old": "funds completion construction of the 34 unsold Building 1 condominium units and their common areas; it does not fund general marina",
+  "new": "funds completion construction of the 34 unsold Building 1 condominium units and their common areas. The DIP Loan does not fund general marina",
+  "at": 82,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 85,
+  "op": "replace",
+  "old": "ordinary operating costs continue to be paid from cash collateral, subject to the Debtors\u2019 separate cash collateral motion and the protections afforded to the Debtors\u2019 secured creditors thereunder.",
+  "new": "ordinary operating costs that must continue to be paid are the authorized use of cash collateral, subject to the separate cash collateral motions, orders and the cost sharing contemplated in the Interim Settlement Agreement Term Sheet.",
+  "at": 266,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 87,
+  "op": "replace",
+  "old": "18.",
+  "new": "19.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 136,
+  "op": "replace",
+  "old": "19.",
+  "new": "20.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 138,
+  "op": "replace",
+  "old": "20.",
+  "new": "21.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 249,
+  "op": "replace",
+  "old": "21.",
+  "new": "22.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 251,
+  "op": "replace",
+  "old": "22.",
+  "new": "23.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 252,
+  "op": "replace",
+  "old": "23.",
+  "new": "24.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 257,
+  "op": "replace",
+  "old": "24.",
+  "new": "25.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 257,
+  "op": "replace",
+  "old": "is accordingly not merely the best available structure \u2014 it is the only structure reasonably available \u2014 and it",
+  "new": "is accordingly not merely the best available structure \u2014 it is the only structure reasonably available. Debtors have requested that the CRO request that IBCP provide the needed funding as an alternative to any priming, but the Debtors are not optimistic that IBCP will agree. Thus, it",
+  "at": 1042,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 258,
+  "op": "replace",
+  "old": "25.",
+  "new": "26.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 260,
+  "op": "replace",
+  "old": "26.",
+  "new": "27.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 260,
+  "op": "replace",
+  "old": "The Debtors describe below the substantial adequate protection that exists with respect to each pre-petition secured creditor, with the most detailed treatment reserved for IBCP, whose collateral is being primed.",
+  "new": "The substantial adequate protection that exists with respect to IBCP, whose collateral is being primed, is as follows:",
+  "at": 829,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 261,
+  "op": "replace",
+  "old": "27.",
+  "new": "28.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 261,
+  "op": "replace",
+  "old": ". As set forth in the Declaration of Aubrey Glick in Support of First Day Motions and the Debtors\u2019 schedules, the Debtors\u2019 collective enterprise assets are valued at",
+  "new": ". The Debtors\u2019 opinion and updated appraisals reflect that the Debtors\u2019 collective enterprise assets are valued at",
+  "at": 17,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 261,
+  "op": "replace",
+  "old": "an equity cushion of approximately $40 million, or approximately 44% of total enterprise asset value. With respect to IBCP specifically, as set forth in detail in Part I above,",
+  "new": "an equity cushion of approximately $40 million. With respect to IBCP specifically, as set forth above,",
+  "at": 308,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 261,
+  "op": "replace",
+  "old": "the equity cushion against IBCP\u2019s direct exposure (after netting USDA Business and Industry guarantees) is approximately 212\u2013240% before the DIP priming",
+  "new": "the equity cushion against IBCP\u2019s direct exposure is approximately 212\u2013240% before the DIP priming",
+  "at": 485,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 261,
+  "op": "delete",
+  "old": "The Eleventh Circuit has held that an equity cushion of this magnitude is more than sufficient to constitute adequate protection. ",
+  "new": "",
+  "at": 688,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 261,
+  "op": "delete",
+  "old": "In re Delta Resources, Inc., 54 F.3d 722, 730 (11th Cir. 1995); ",
+  "new": "",
+  "at": 822,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 262,
+  "op": "replace",
+  "old": "28.",
+  "new": "29.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 262,
+  "op": "replace",
+  "old": ". As also detailed in Part I, the 2024 Plumert USDA-format appraisal of the Adelaide Pointe warehouse and boater services collateral explicitly noted approximately $6 million of land value adjacent to the appraised component that the appraisal did not value and that IBCP has never since obtained an appraisal to incorporate. This unappraised land value alone supports approximately half of the DIP Loan \u2014 collateral value that IBCP\u2019s loan documents secure but that IBCP\u2019s loss-reserve framework does",
+  "new": ". The Debtors\u2019 opinion of the 2024 Plumert USDA-format appraisal is that this unappraised land value alone supports approximately half of the DIP Loan",
+  "at": 25,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 262,
+  "op": "delete",
+  "old": "flect.",
+  "new": "",
+  "at": 537,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 263,
+  "op": "replace",
+  "old": "29.",
+  "new": "30.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 263,
+  "op": "replace",
+  "old": "The completion of the 34 Building 1 condominium units directly enhances IBCP\u2019s single largest collateral component",
+  "new": "The completion of the 34 Condo Building 1 units directly enhances IBCP\u2019s single largest collateral component",
+  "at": 229,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 263,
+  "op": "replace",
+  "old": "and the $5,000,000 IBCP interest reserve services IBCP\u2019s debt during these cases from DIP proceeds",
+  "new": "and the proposed $5,000,000 IBCP interest reserve contemplates any debt service during these cases from DIP proceeds",
+  "at": 442,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 263,
+  "op": "replace",
+  "old": " from cash collateral. Courts have recognized that the use of estate funds to preserve going-concern and collateral value itself supports adequate protection. ",
+  "new": " from other secured creditors\u2019 cash collateral. ",
+  "at": 552,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 264,
+  "op": "replace",
+  "old": "30.",
+  "new": "31.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 264,
+  "op": "replace",
+  "old": ". The Final Order will grant IBCP replacement liens on post-petition property of the Debtors\u2019 estates of the same kind, priority, and validity as IBCP\u2019s pre-petition liens, to the extent of any post-petition diminution in the value of IBCP\u2019s interest in the Priming Collateral. This is conventional section 361(2) adequate protection and is appropriate in addition to the equity-cushion analysis.",
+  "new": ". The Final Order will grant IBCP replacement liens that the Court would require as adequate protection to the extent of any post-petition diminution in the value of IBCP\u2019s interest in the Priming Collateral.",
+  "at": 20,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 265,
+  "op": "replace",
+  "old": "31.",
+  "new": "32.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 265,
+  "op": "replace",
+  "old": ". The largest professional and administrative categories funded by the DIP Loan \u2014 estate professional fees and United States Trustee fees \u2014 would, if not funded by the DIP Loan, in any event constitute administrative expenses under section 503(b). Funding these items through the DIP Loan crystallizes their amount and prevents their accrual as unfunded administrative claims against the very estates the secured creditors look to.",
+  "new": ". The professional and administrative fees and expenses funded by the DIP Loan would, if not funded by the DIP Loan, in any event constitute administrative expenses under section 503(b). Funding these items through the DIP Loan ensures that the employed professionals can remain committed to the case and eliminates an impediment of administrative expenses that would have to be paid upon confirmation of any plan proposed by any party in interest to the extent allowed. The worst case scenario for professionals would be a second priority claim if the cases were converted.",
+  "at": 50,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 268,
+  "op": "replace",
+  "old": "32.",
+  "new": "33.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 269,
+  "op": "replace",
+  "old": "33.",
+  "new": "34.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 269,
+  "op": "replace",
+  "old": "Courts in this District and elsewhere routinely approve post-petition financing under section 364 where, as here, (i)",
+  "new": "Courts routinely approve post-petition financing under section 364 where (i)",
+  "at": 3,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 271,
+  "op": "replace",
+  "old": "34.",
+  "new": "35.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 271,
+  "op": "replace",
+  "old": "The business judgment rule governs the Court\u2019s review of a debtor-in-possession\u2019s decision to obtain post-petition financing. ",
+  "new": "The Debtors believe that the CRO, particularly given his newly created fiduciary duties to the Debtors that supersede his duties as Receiver, will concur that the proposed DIP financing is in the best interests of all constituents, including the vocal HOA. The business judgment rule governs the Court\u2019s review of a debtor-in-possession\u2019s decision to obtain post-petition financing. ",
+  "at": 3,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 271,
+  "op": "delete",
+  "old": "See Ames, 115 B.R. at 38 (court should not \u201csecond guess\u201d the debtor\u2019s business judgment).",
+  "new": "",
+  "at": 129,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 272,
+  "op": "replace",
+  "old": "35.",
+  "new": "36.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 272,
+  "op": "replace",
+  "old": "it funds the professionals required to administer the Chapter 11 Cases, including the Chief Restructuring Officer, the claims agent, appraisers, and tax and accounting professionals.",
+  "new": "it funds the professionals whose services are essential and necessary to the Chapter 11 Cases, including appraisers, and tax and accounting professionals.",
+  "at": 87,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 272,
+  "op": "replace",
+  "old": "it funds the completion of the 34 unsold Building 1 condominium units \u2014 converting the estates\u2019 largest unfinished asset into approximately $29,512,000 of projected net sale proceeds that retire secured debt and fund the plan.",
+  "new": "it funds the completion of the 34 unsold Condo Building 1 units \u2014 converting the unfinished asset into approximately $29,512,000 of projected net sale proceeds to pay what should be secured debt and fund the plan.",
+  "at": 278,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 272,
+  "op": "replace",
+  "old": "it services the IBCP debt during these cases through a dedicated $5,000,000 interest reserve, segregating that carry from operating cash flow and allowing",
+  "new": "it adequately protects IBCP during these cases through a dedicated $5,000,000 interest reserve, segregating that cost from operating cash flow and preserving",
+  "at": 512,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 272,
+  "op": "replace",
+  "old": "to litigate the funding of these items on a piecemeal basis as the case progresses.",
+  "new": "to litigate the funding of these items through cash collateral orders on a piecemeal basis as the case progresses.",
+  "at": 904,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 274,
+  "op": "replace",
+  "old": "36.",
+  "new": "37.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 274,
+  "op": "replace",
+  "old": "The pricing reflects market terms for priming DIP facilities to small- and middle-market debtors",
+  "new": "The pricing reflects market terms for priming DIP facilities to already overly leveraged small- and middle-market debtors",
+  "at": 218,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 274,
+  "op": "replace",
+  "old": "There is no roll-up of pre-petition debt \u2014 the $5,000,000 IBCP interest reserve funds post-petition debt service on IBCP\u2019s condominium line as adequate protection and repays no pre-petition principal \u2014 no cross-collateralization of pre-petition claims, no lien on avoidance actions or their proceeds, no waiver of the estates\u2019 section 552(b) rights, and no stipulations as to the validity of pre-petition secured claims \u2014 all challenge rights are preserved. The Final Order will provide",
+  "new": "While the Commitment requires that the Final Order provide",
+  "at": 713,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 274,
+  "op": "replace",
+  "old": "a customary and appropriate protection for a post-petition lender extending new money on a priming basis; no such protection is extended to any pre-petition creditor. The relief requested falls comfortably within the heartland of DIP transactions approved by courts in this District.",
+  "new": "such provision is a customary and appropriate protection for a post-petition lender extending new money on a priming basis. The relief requested falls comfortably within the heartland of DIP transactions approved with their own secured creditors.",
+  "at": 1281,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 276,
+  "op": "replace",
+  "old": "37.",
+  "new": "38.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 276,
+  "op": "replace",
+  "old": "The adequate protection of IBCP rests on five independent and overlapping grounds, any one of which would itself suffice:",
+  "new": "The adequate protection of IBCP rests on multiple independent and overlapping grounds, as discussed above, primarily the equity cushion:",
+  "at": 238,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 277,
+  "op": "replace",
+  "old": "38.",
+  "new": "39.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 277,
+  "op": "replace",
+  "old": "First, an equity cushion of approximately 212\u2013240% on IBCP\u2019s direct exposure. As set forth in detail in Part I (and supported by IBCP\u2019s own SEC disclosures), IBCP\u2019s direct exposure across the credit relationship is approximately $17,700,000 after netting USDA Business and Industry guarantees of approximately 75% on the guaranteed loans. The collateral",
+  "new": "As set forth in detail in Part I, IBCP\u2019s direct exposure across the credit relationship is approximately $17,700,000. The collateral",
+  "at": 3,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 277,
+  "op": "replace",
+  "old": " of approximately 140% to 170% on its direct exposure after the priming \u2014 before giving effect to the value created by completing the condominium units or the $5,000,000 of IBCP debt service funded by the DIP Loan itself \u2014 well in excess of the 20\u201340% range historically treated by courts as sufficient adequate protection. ",
+  "new": " of approximately 140% to 170% on its direct exposure after the priming. ",
+  "at": 591,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 277,
+  "op": "delete",
+  "old": "Delta Resources, 54 F.3d at 730; ",
+  "new": "",
+  "at": 919,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 278,
+  "op": "replace",
+  "old": "39.",
+  "new": "40.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 279,
+  "op": "replace",
+  "old": "40.",
+  "new": "41.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 280,
+  "op": "replace",
+  "old": "41.",
+  "new": "42.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 280,
+  "op": "replace",
+  "old": "Fourth, value preservation and direct debt service through the DIP-funded work. The DIP Loan completes the condominium units that constitute IBCP\u2019s single largest collateral component, funds the EGLE compliance work that arrests regulatory exposure against the campus, funds the professionals required to administer these cases, and",
+  "new": "(i) The DIP Loan completes the condominium units that constitute IBCP\u2019s single largest collateral component, (ii) funds the EGLE compliance work that must be addressed to avoid regulatory exposure and enforcement against the campus, (iii) funds the professionals required to administer these cases, and",
+  "at": 3,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 280,
+  "op": "replace",
+  "old": "dedicates $5,000,000 of its own proceeds to servicing IBCP\u2019s debt during these cases.",
+  "new": "dedicates $5,000,000 as a reserve to potentially service IBCP\u2019s debt during these cases for purposes of only adequate protection.",
+  "at": 349,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 281,
+  "op": "replace",
+  "old": "42.",
+  "new": "43.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 281,
+  "op": "replace",
+  "old": "Fifth, IBCP\u2019s own public position. IBCP has publicly told its investors and the SEC that it is \u201cappropriately reserved\u201d for its exposure in this credit at a level approximately 33% to 44% below the face balance it asserts to this Court. Having taken that position publicly, IBCP cannot consistently argue to this Court that the priming transaction causes it material diminution \u2014 particularly where $5,000,000 of the priming facility is dedicated to paying IBCP itself and $5,000,000 more is dedicated to completing IBCP\u2019s collateral",
+  "new": "IBCP has told the SEC that it is \u201cappropriately reserved\u201d for its exposure in this credit at a level approximately 33% to 44% below the balance it asserts to this Court",
+  "at": 3,
+  "conf": "red",
+  "ctx": ""
+ },
+ {
+  "para": 282,
+  "op": "replace",
+  "old": "43.",
+  "new": "44.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 282,
+  "op": "replace",
+  "old": "and consistent with the standards of the Eleventh Circuit. ",
+  "new": "and consistent with both established standards and sound business judgment. ",
+  "at": 200,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 283,
+  "op": "replace",
+  "old": "IX. LOCAL RULE 4001-2 DISCLOSURES",
+  "new": "IX. LOCAL RULE 4001-2 DISCLOSURES (while set forth in table format on page 18, above)",
+  "at": 0,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 284,
+  "op": "replace",
+  "old": "44.",
+  "new": "45.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 289,
+  "op": "replace",
+  "old": "All challenge rights of the Debtors and any official committee are expressly preserved.",
+  "new": "All challenge rights of the Debtors are expressly preserved.",
+  "at": 68,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 290,
+  "op": "replace",
+  "old": "and all other pending or future causes of action and their proceeds (other than proceeds in the form of real property).",
+  "new": "and all other pending or future causes of action and their proceeds.",
+  "at": 260,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 293,
+  "op": "replace",
+  "old": "does not prime any lien on the Waterland Commerce property, and does not prime the position of any other pre-petition secured creditor. Adequate protection is described in Part VIII.D above.",
+  "new": "and does not prime any lien on the Waterland Commerce property.",
+  "at": 664,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 294,
+  "op": "replace",
+  "old": "Adequate Protection Payments. Yes. The Budget includes a $5,000,000 interest reserve dedicated to post-petition debt service on IBCP\u2019s condominium line during these cases, funded from DIP proceeds. Additional cash collateral",
+  "new": "Adequate Protection Payments. Yes. Additional cash collateral",
+  "at": 3,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 297,
+  "op": "replace",
+  "old": "45.",
+  "new": "46.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 297,
+  "op": "replace",
+  "old": "(iii) all creditors of the Borrowers; (iv) all parties with whom the Borrowers have executory contracts with respect to the Collateral; (v) all taxing authorities having or asserting authority over the Borrowers, including the City of Muskegon and the Michigan Department of Treasury; (vi) all entities that have filed a notice to owner or asserted potential lien rights with respect to the Collateral; (vii) the holders",
+  "new": "(iii) all scheduled creditors of the Borrowers; (iv) EGLE; (v) the City of Muskegon; (vi) the holders",
+  "at": 320,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 297,
+  "op": "replace",
+  "old": "(viii) the Internal Revenue Service; and (ix) any party",
+  "new": "(vii) the Internal Revenue Service; and (viii) any party",
+  "at": 825,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 298,
+  "op": "replace",
+  "old": "XI. REQUEST FOR EMERGENCY CONSIDERATION",
+  "new": "XI. REQUEST FOR PRELIMINARY CONSIDERATION",
+  "at": 0,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 299,
+  "op": "replace",
+  "old": "46.",
+  "new": "47.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 299,
+  "op": "replace",
+  "old": "the Debtors request that this Motion be set for a final hearing at the earliest date consistent with Rule 4001(c)(2).",
+  "new": "the Debtors request that this Motion be set for an expedited hearing and pretrial conference at the earliest date consistent with Rule 4001(c)(2).",
+  "at": 86,
+  "conf": "yellow",
+  "ctx": ""
+ },
+ {
+  "para": 299,
+  "op": "replace",
+  "old": "Each week of delay extends the period during which the 34 unsold condominium units remain unfinished and unmarketable, the IBCP carry accrues without a funded reserve, and the estate professionals remain unfunded",
+  "new": "Each week of additional delay extends the period during which the 34 unsold condominium units remain unfinished and unmarketable and the estate professionals remain unfunded",
+  "at": 445,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 299,
+  "op": "replace",
+  "old": "each week of delay consumes the construction season during which the completion work can be performed most efficiently.",
+  "new": "each week of delay consumes the summer and fall construction season during which the completion work can be performed most efficiently.",
+  "at": 664,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 300,
+  "op": "replace",
+  "old": "47.",
+  "new": "48.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 302,
+  "op": "replace",
+  "old": "48.",
+  "new": "49.",
+  "at": 0,
+  "conf": "green",
+  "ctx": ""
+ },
+ {
+  "para": 302,
+  "op": "replace",
+  "old": "(vi) scheduling a final hearing on expedited notice; and (vii) granting such other and further relief as is just and proper.",
+  "new": "(vi) scheduling a preliminary hearing and any final hearing on expedited notice; (vii) establishing an efficient, fair and expedited discovery process; and (viii) granting such other and further relief as is just and proper.",
+  "at": 837,
+  "conf": "yellow",
+  "ctx": ""
+ }
+]

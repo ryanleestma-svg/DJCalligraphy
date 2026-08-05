@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+jobs/
+out/
+# large scan binaries - reference by path instead
+fixtures/*.pdf
+!fixtures/README.md

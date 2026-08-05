@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red Pen</title>
+<style>
+  :root{
+    --bg:#faf9f7; --fg:#1c1b19; --muted:#6b6862; --line:#e0ddd6;
+    --card:#fff; --accent:#c0392b; --green:#2e7d32; --yellow:#b8860b;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{ --bg:#161513; --fg:#eceae5; --muted:#9a968e; --line:#302e2a;
+           --card:#201f1c; --accent:#e05c4a; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+       font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:760px;margin:0 auto;padding:48px 20px 80px}
+  h1{font-size:28px;margin:0 0 4px;letter-spacing:-.02em}
+  .sub{color:var(--muted);margin:0 0 32px}
+  .drops{display:grid;gap:16px;grid-template-columns:1fr 1fr}
+  @media(max-width:640px){.drops{grid-template-columns:1fr}}
+  .drop{background:var(--card);border:2px dashed var(--line);border-radius:12px;
+        padding:28px 18px;text-align:center;cursor:pointer;transition:.15s;
+        min-height:150px;display:flex;flex-direction:column;justify-content:center}
+  .drop:hover{border-color:var(--muted)}
+  .drop.over{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--card))}
+  .drop.set{border-style:solid;border-color:var(--green)}
+  .drop h2{font-size:15px;margin:0 0 6px;font-weight:600}
+  .drop p{margin:0;color:var(--muted);font-size:13px;word-break:break-word}
+  .go{margin-top:24px;width:100%;padding:15px;border:0;border-radius:10px;
+      background:var(--accent);color:#fff;font-size:17px;font-weight:600;cursor:pointer}
+  .go:disabled{opacity:.4;cursor:not-allowed}
+  .panel{margin-top:28px;background:var(--card);border:1px solid var(--line);
+         border-radius:12px;padding:20px;display:none}
+  .panel.show{display:block}
+  .bar{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin:12px 0}
+  .bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .35s}
+  .stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:14px}
+  .chip{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px}
+  .g{background:#7bc47f}.y{background:#f2d16b}.r{background:#e88b7d}
+  a.dl{display:inline-block;margin-top:16px;padding:12px 20px;border-radius:9px;
+       background:var(--green);color:#fff;text-decoration:none;font-weight:600}
+  .err{color:var(--accent);font-size:14px;white-space:pre-wrap}
+  .hint{margin-top:26px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+  input[type=file]{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Red Pen</h1>
+  <p class="sub">Drop the base document and Dave's marked-up scan. Press GO.</p>
+
+  <div class="drops">
+    <label class="drop" id="d-base">
+      <input type="file" id="f-base" accept=".docx">
+      <h2>1 &middot; Base document</h2>
+      <p id="n-base">Drag a .docx here, or click</p>
+    </label>
+    <label class="drop" id="d-mark">
+      <input type="file" id="f-mark" accept=".pdf,.png,.jpg,.jpeg">
+      <h2>2 &middot; Red-pen scan</h2>
+      <p id="n-mark">Drag the scanned PDF here, or click</p>
+    </label>
+  </div>
+
+  <button class="go" id="go" disabled>GO</button>
+
+  <div class="panel" id="panel">
+    <strong id="msg">Starting…</strong>
+    <div class="bar"><i id="fill"></i></div>
+    <div id="done" style="display:none">
+      <div class="stats">
+        <span class="chip"><span class="dot g"></span><b id="c-g">0</b> high</span>
+        <span class="chip"><span class="dot y"></span><b id="c-y">0</b> medium</span>
+        <span class="chip"><span class="dot r"></span><b id="c-r">0</b> low</span>
+        <span class="chip" id="c-q-wrap">· <b id="c-q">0</b> flagged for you</span>
+      </div>
+      <a class="dl" id="dl" href="#">Download tracked document</a>
+    </div>
+    <div class="err" id="err"></div>
+  </div>
+
+  <p class="hint">Every change is a real Word revision — right-click, Accept or Reject.
+  Colour is confidence, not meaning. When you're finished reviewing:
+  <b>Select All → Highlighter → No Color</b> clears every band at once.</p>
+</div>
+
+<script>
+const files = {base:null, markup:null};
+
+function wire(key, dropId, inputId, labelId, label){
+  const drop = document.getElementById(dropId);
+  const input = document.getElementById(inputId);
+  const name = document.getElementById(labelId);
+  const set = f => {
+    files[key] = f;
+    name.textContent = f ? f.name : label;
+    drop.classList.toggle('set', !!f);
+    document.getElementById('go').disabled = !(files.base && files.markup);
+  };
+  input.addEventListener('change', e => set(e.target.files[0]));
+  ['dragenter','dragover'].forEach(ev => drop.addEventListener(ev, e => {
+    e.preventDefault(); drop.classList.add('over');
+  }));
+  ['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e => {
+    e.preventDefault(); drop.classList.remove('over');
+  }));
+  drop.addEventListener('drop', e => set(e.dataTransfer.files[0]));
+}
+wire('base','d-base','f-base','n-base',"Drag a .docx here, or click");
+wire('markup','d-mark','f-mark','n-mark',"Drag the scanned PDF here, or click");
+
+document.getElementById('go').addEventListener('click', async () => {
+  const panel = document.getElementById('panel');
+  panel.classList.add('show');
+  document.getElementById('done').style.display = 'none';
+  document.getElementById('err').textContent = '';
+  document.getElementById('go').disabled = true;
+
+  const fd = new FormData();
+  fd.append('base', files.base);
+  fd.append('markup', files.markup);
+
+  let res = await fetch('/api/jobs', {method:'POST', body:fd});
+  if(!res.ok){
+    document.getElementById('err').textContent = 'Upload failed: ' + (await res.text());
+    document.getElementById('go').disabled = false;
+    return;
+  }
+  const {job_id} = await res.json();
+
+  const poll = setInterval(async () => {
+    const s = await (await fetch('/api/jobs/' + job_id)).json();
+    document.getElementById('msg').textContent = s.message || s.status;
+    document.getElementById('fill').style.width = Math.round((s.progress||0)*100) + '%';
+    if(s.status === 'done'){
+      clearInterval(poll);
+      const c = s.result.confidence;
+      document.getElementById('c-g').textContent = c.green;
+      document.getElementById('c-y').textContent = c.yellow;
+      document.getElementById('c-r').textContent = c.red;
+      document.getElementById('c-q').textContent = s.result.queries;
+      document.getElementById('c-q-wrap').style.display = s.result.queries ? '' : 'none';
+      document.getElementById('dl').href = '/api/jobs/' + job_id + '/download';
+      document.getElementById('done').style.display = '';
+      document.getElementById('go').disabled = false;
+    } else if(s.status === 'error'){
+      clearInterval(poll);
+      document.getElementById('err').textContent = s.message;
+      document.getElementById('go').disabled = false;
+    }
+  }, 1200);
+});
+</script>
+</body>
+</html>
