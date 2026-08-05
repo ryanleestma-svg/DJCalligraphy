@@ -27,11 +27,24 @@ W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 BLANK_INK_FRACTION = 0.002
 
 
+# Vision downscales any image whose long edge exceeds this, so a full letter
+# page rendered at 170 dpi actually reaches the model at ~143 dpi. Handwriting
+# detail cannot be added by rendering higher - it is resampled away. Sending
+# horizontal bands instead lets each band fill the budget: two bands give ~285
+# effective dpi, three give ~428.
+VISION_LONG_EDGE = 1568
+
+
 @dataclass
 class ScanPage:
     index: int          # 1-based sequence among *content* pages
     source_index: int   # 0-based index in the original PDF
     png: bytes
+    tiles: list[bytes] = None   # optional high-resolution horizontal bands
+
+    def images(self) -> list[bytes]:
+        """What to actually send: the bands if present, else the whole page."""
+        return self.tiles if self.tiles else [self.png]
 
 
 def _ink_fraction(png: bytes) -> float:
@@ -42,8 +55,42 @@ def _ink_fraction(png: bytes) -> float:
     return dark / max(1, len(px))
 
 
-def render_scan(pdf_path: str | Path, dpi: int = 170) -> list[ScanPage]:
-    """Render the markup scan, dropping blank reverse sides."""
+def _grid(page, cols: int, rows: int, overlap: float) -> list[bytes]:
+    """Split a page into an overlapping grid, each tile filling the pixel budget.
+
+    Tiles must be narrower as well as shorter. Horizontal bands alone do not
+    help: the page WIDTH stays the long edge, so the scale factor is pinned at
+    1568/8.5in ~ 184 dpi however many bands are cut - against 143 dpi for the
+    whole page. Halving the width as well takes a letter page to ~285 dpi.
+
+    Tiles overlap because a caret, a margin line or a struck phrase sitting on a
+    boundary would otherwise be cut and read as two partial marks.
+    """
+    r = page.rect
+    w, h = r.width / cols, r.height / rows
+    px, py = w * overlap, h * overlap
+    out = []
+    for ry in range(rows):
+        for cx in range(cols):
+            clip = fitz.Rect(
+                max(r.x0, r.x0 + cx * w - px), max(r.y0, r.y0 + ry * h - py),
+                min(r.x1, r.x0 + (cx + 1) * w + px),
+                min(r.y1, r.y0 + (ry + 1) * h + py),
+            )
+            want = VISION_LONG_EDGE / max(clip.width, clip.height)
+            out.append(
+                page.get_pixmap(matrix=fitz.Matrix(want, want), clip=clip).tobytes("png")
+            )
+    return out
+
+
+def render_scan(pdf_path: str | Path, dpi: int = 170, cols: int = 1,
+                rows: int = 1, overlap: float = 0.12) -> list[ScanPage]:
+    """Render the markup scan, dropping blank reverse sides.
+
+    cols/rows > 1 additionally renders each page as an overlapping grid of tiles
+    at much higher effective resolution; see VISION_LONG_EDGE.
+    """
     doc = fitz.open(str(pdf_path))
     pages: list[ScanPage] = []
     n = 0
@@ -52,7 +99,8 @@ def render_scan(pdf_path: str | Path, dpi: int = 170) -> list[ScanPage]:
         if _ink_fraction(png) < BLANK_INK_FRACTION:
             continue
         n += 1
-        pages.append(ScanPage(index=n, source_index=i, png=png))
+        band = _grid(page, cols, rows, overlap) if (cols > 1 or rows > 1) else None
+        pages.append(ScanPage(index=n, source_index=i, png=png, tiles=band))
     doc.close()
     return pages
 

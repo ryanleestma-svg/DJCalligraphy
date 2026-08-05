@@ -97,8 +97,10 @@ def _client() -> anthropic.Anthropic:
     return anthropic.Anthropic()
 
 
-def _call(page_png: bytes, base_text: str, glossary: str, lens: str,
+def _call(page_png, base_text: str, glossary: str, lens: str,
           context: str = "") -> list[dict]:
+    """page_png may be one PNG or a list of high-resolution bands of one page."""
+    imgs = page_png if isinstance(page_png, (list, tuple)) else [page_png]
     blocks = reference_blocks()
     blocks.append(
         {
@@ -111,16 +113,22 @@ def _call(page_png: bytes, base_text: str, glossary: str, lens: str,
         blocks.append({"type": "text", "text": context, "cache_control": {"type": "ephemeral"}})
     if glossary:
         blocks.append({"type": "text", "text": "DEFINED TERMS ESTABLISHED EARLIER:\n" + glossary})
-    blocks.append(
-        {
-            "type": "image",
-            "source": {
-                "type": "base64",
-                "media_type": "image/png",
-                "data": base64.b64encode(page_png).decode("ascii"),
-            },
-        }
-    )
+    if len(imgs) > 1:
+        blocks.append({"type": "text", "text": (
+            f"The page is supplied as {len(imgs)} overlapping horizontal bands, "
+            "top to bottom, at high magnification. They overlap, so a mark near "
+            "a boundary appears twice - report it ONCE.")})
+    for img in imgs:
+        blocks.append(
+            {
+                "type": "image",
+                "source": {
+                    "type": "base64",
+                    "media_type": "image/png",
+                    "data": base64.b64encode(img).decode("ascii"),
+                },
+            }
+        )
     blocks.append({"type": "text", "text": BASE_TASK + "\n" + lens})
 
     resp = _client().messages.create(

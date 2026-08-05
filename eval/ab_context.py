@@ -106,7 +106,7 @@ def run_arm(name: str, pages, base_text, paras, truth, use_prior, brief) -> dict
             if blk:
                 ctx_parts.append(blk)
         gl = "\n".join(f'{g["term"]} = {g["means"]}' for g in glossary)
-        edits, terms = read_page(p.png, base_text, gl, p.index, "\n\n".join(ctx_parts))
+        edits, terms = read_page(p.images(), base_text, gl, p.index, "\n\n".join(ctx_parts))
         produced.extend(e.__dict__ for e in edits)
         for t in terms:
             if t not in glossary:
