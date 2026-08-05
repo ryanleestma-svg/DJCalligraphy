@@ -1,0 +1,18 @@
+==================================================================
+RE-SCORED IN BASE-DOCUMENT COORDINATES
+==================================================================
+ground-truth edits          : 116
+produced edits              : 352  (12 could not be placed in the base text)
+
+truth edits FOUND           : 110/116  = 95% recall
+   content exact  (>=0.90)  : 32
+   content close  (>=0.70)  : 33
+   content wrong  ( <0.70)  : 45
+truth edits MISSED          : 6
+
+produced overlapping truth  : 278
+produced NOT near any truth : 62
+fragmentation               : 2.53 produced edits per truth edit
+
+confidence (produced)       : {'green': 73, 'yellow': 190, 'red': 89}
+ops (produced)              : {'insert': 103, 'delete': 69, 'replace': 97, 'footnote': 7, 'query': 75, 'split_para': 1}
