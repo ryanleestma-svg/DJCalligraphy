@@ -106,3 +106,55 @@ stronger replacement wording, higher magnification. Recall is stable at ~95% and
 wording agreement sits at ~60%. The residual error looks like genuine ambiguity
 in the ink rather than anything the scaffolding can recover, which is what the
 human review pass exists for.
+
+## Conversation vs per-page — the 7-page result did NOT hold at 28
+
+At 7 pages a single conversation clearly beat isolated per-page calls: exact
+34.0 [32-36] against 29.5 [29-30], ranges not overlapping. On that evidence a
+commit message claimed conversation was "adopted". It was not, and should not
+have been: run.py has always called read_page, and the full-document numbers
+say per-page is still ahead.
+
+Full 28-page document, after bulk deletions are surfaced as queries:
+
+| | edits | document score |
+|---|---|---|
+| do nothing | 0 | 0.8147 |
+| conversation | 150 | 0.8449 |
+| **per-page** | 180 | **0.8615** |
+
+What conversation does better, and it is not nothing:
+
+* fragmentation **1.26** against 2.15 - much cleaner, far fewer duplicate edits
+* page alignment: 26 of 28 pages agree with ground truth on whether the page
+  has any edits at all, including all six genuinely empty pages
+* 35% faster
+
+Why the 7-page win evaporated - two candidates, not yet separated:
+
+1. **Image pruning.** Accumulating 28 pages of images exceeds the request size
+   limit outright, so images from read pages must be dropped. The 7-page test
+   retained every image; the shippable configuration cannot.
+2. **Drift over a long thread.** Output tracks ground truth closely for the
+   first ten pages and then over-produces roughly 2x: p21 truth 6 / conv 8,
+   p22 4 / 9, p24 4 / 10, p26 4 / 10.
+
+If drift is the cause, the fix is a conversation bounded to a SECTION rather
+than the whole document - enough context for the argument to be continuous,
+short enough not to wander. That is the obvious next experiment.
+
+## Bulk deletions must never be applied — ADOPTED
+
+A strike across a long span nearly always means "rewrite this", with the
+replacement in the margin or on the back of the sheet. When the reader misses
+the replacement it emits an empty-replacement delete, and the passage is
+amputated. This is the one error a reviewer cannot catch by reading the result:
+deleted text leaves no trace to notice.
+
+Such edits now become red queries. The passage survives, the strike is
+surfaced, one click clears the marker.
+
+| | before | after |
+|---|---|---|
+| per-page | 0.8533 | **0.8615** |
+| conversation | 0.8025 | 0.8449 |

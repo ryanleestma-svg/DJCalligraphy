@@ -64,8 +64,24 @@ def normalise(edits: list[Edit]) -> list[Edit]:
             out.append(e)
             continue
         if not (e.replacement or "").strip() and len(e.anchor) > SUSPECT_DELETE_CHARS:
-            # Apply it, but never silently: force it in front of the reviewer.
+            # Do NOT delete the passage. A strike across a long span nearly always
+            # means "rewrite this", with the replacement written in the margin or
+            # on the back of the sheet - and the reader has evidently not captured
+            # it. Removing the text represents a rewrite as an amputation, and it
+            # is the one error the reviewer cannot spot by reading the result:
+            # what is gone leaves no trace. Measured on the reference document, 15
+            # such edits removed 2,169 characters and cost 0.042 of document
+            # similarity outright.
+            #
+            # Emit a red query instead. The passage survives, the strike is
+            # surfaced, and one click removes the marker.
+            e.op = "query"
             e.confidence = "red"
+            e.replacement = (
+                "[?? this passage appears struck through in full - confirm whether "
+                "it should be deleted, and supply the replacement text if he wrote "
+                "one in the margin or on the back of the sheet ??]"
+            )
         _, old_core, new_core, _ = minimal_span(e.anchor, e.replacement)
         if not old_core and not new_core:
             continue  # no-op
