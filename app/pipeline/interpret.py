@@ -22,6 +22,7 @@ from concurrent.futures import ThreadPoolExecutor
 import anthropic
 
 from .models import Edit
+from .reconcile import minimal_span
 from .reference import reference_blocks
 from .schema import EDIT_SCHEMA, anchor_is_safe, resolve_anchor
 
@@ -58,16 +59,30 @@ downstream. Report only the paragraph insertion that caused it, never the \
 individual number changes.
 """
 
+# Both lenses must be EXHAUSTIVE. An earlier version paired an exhaustive
+# line-by-line lens against a free "work down the page" lens, which was not
+# forced to cover anything: on one dense page that reader reported 1 mark where
+# the other reported 15. Every such cluster is a false disagreement, so it burns
+# a tiebreak and comes out yellow. The diversity that is wanted here is in HOW
+# the page is searched, not in HOW MUCH of it gets searched.
+_EXHAUSTIVE = (
+    "You must account for the WHOLE page. Before answering, satisfy yourself "
+    "that every red stroke on the page has been assigned to an edit. Missing a "
+    "mark is worse than reporting one you are unsure of - an unsure one can be "
+    "flagged, a missed one is invisible."
+)
+
 READER_LENS = {
     "A": (
-        "Work down the page mark by mark, in reading order. For each red mark, "
-        "identify what kind of mark it is first, then what it says."
+        "Search RED-FIRST: scan for red ink anywhere on the page - body, margins, "
+        "between lines, top and bottom edges - and for each stroke work out which "
+        "printed text it attaches to. " + _EXHAUSTIVE
     ),
     "B": (
-        "Work from the printed text outward. Take each printed line in turn and "
-        "ask whether anything red touches it; only then read the red. This is a "
-        "deliberately different search strategy from the other reader - do not "
-        "try to guess what they would say."
+        "Search TEXT-FIRST: take each printed line in turn, in order, and ask "
+        "whether anything red touches it; only then read the red. This is a "
+        "deliberately different search order from the other reader - do not try "
+        "to guess what they would say. " + _EXHAUSTIVE
     ),
 }
 
@@ -220,11 +235,18 @@ def read_page(page_png: bytes, base_text: str, glossary: str, page_no: int) -> t
     settled: list[tuple[dict, str, list[str]]] = []
     contested: list[tuple[list, list]] = []
     for a_items, b_items, _span_ in clusters:
-        agreed = (
-            len(a_items) == 1
-            and len(b_items) == 1
-            and _sim(a_items[0].get("replacement", ""), b_items[0].get("replacement", "")) > 0.95
-        )
+        # Compare the EFFECTIVE CHANGE each reader describes, combining any
+        # fragments, rather than requiring one edit each with matching text.
+        # A reader may legitimately split one mark into two adjacent edits.
+        agreed = False
+        if a_items and b_items:
+            ca = " ".join(
+                minimal_span(x.get("anchor", ""), x.get("replacement", ""))[2] for x in a_items
+            )
+            cb = " ".join(
+                minimal_span(x.get("anchor", ""), x.get("replacement", ""))[2] for x in b_items
+            )
+            agreed = _sim(ca, cb) > 0.90
         if agreed:
             settled.append((a_items[0], "green", ["A", "B"]))
         else:
