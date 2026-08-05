@@ -56,3 +56,53 @@ Two results worth keeping in mind:
 and reproduces the known-good document exactly (161/161 applied, accept-all text
 identical). Any difference in a live run is an interpretation difference, not a
 writer bug.
+
+## Interventions tested with repeated measures
+
+Two runs of the identical baseline differ by ~2 exact and ~3 wrong edits, so
+single-run comparisons at this scale mean nothing. Everything below is repeated.
+
+### Document context — REJECTED (n=4 each)
+
+The hand-run process read the whole document for understanding first, and
+worked through every edit in one conversation. Both were tested:
+
+| metric | baseline | + document brief |
+|---|---|---|
+| found | 60.8 [60-61] | 61.2 [60-62] |
+| exact | **32.5** [30-35] | 30.2 [29-32] |
+| wrong | **20.2** [18-23] | 22.0 [20-25] |
+| spurious | **16.5** [14-22] | 18.8 [13-27] |
+| fragmentation | **1.5** | 1.6 |
+| exact+close | **40.5** sd 1.7 | 39.2 sd 2.2 |
+
+Carrying prior edits forward (arm B) was likewise a wash: a few edits moved
+from "close" to "exact", more moved into "wrong".
+
+**Per-page isolation is not what costs accuracy.** More context made the
+readers more expansive, not more accurate.
+
+### Image resolution — REJECTED (n=3 / n=2)
+
+Vision downscales anything over 1568 px on the long edge, so whole pages have
+always reached the model at ~143 dpi. A 2x2 overlapping grid raises that to
+~230 dpi.
+
+| | found | exact | wrong | exact+close |
+|---|---|---|---|---|
+| whole page | 61.3 | **32.0** | **19.7** | **41.7** |
+| 2x2 tiles | **63.0** | 28.0 | 26.0 | 37.0 |
+
+Magnification finds *more* marks but transcribes them *worse*. Losing the whole
+page from view costs more than the extra detail gains: a caret only means
+something in relation to the line it points into, and margin lines run across
+the full width.
+
+### Standing conclusion
+
+Every lever that acts on reasoning or perception has come back a wash or a
+regression: document brief, prior-edit carry-forward, adversarial verification,
+stronger replacement wording, higher magnification. Recall is stable at ~95% and
+wording agreement sits at ~60%. The residual error looks like genuine ambiguity
+in the ink rather than anything the scaffolding can recover, which is what the
+human review pass exists for.

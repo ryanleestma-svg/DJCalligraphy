@@ -140,8 +140,40 @@ def _call(page_png, base_text: str, glossary: str, lens: str,
     )
     for block in resp.content:
         if block.type == "tool_use":
-            return block.input.get("edits", []), block.input.get("defined_terms", [])
+            return (
+                _sane_edits(block.input.get("edits", [])),
+                _sane_terms(block.input.get("defined_terms", [])),
+            )
     return [], []
+
+
+def _sane_edits(raw) -> list[dict]:
+    """Discard anything that is not a usable edit object.
+
+    Structured output is not a guarantee. A live run returned `edits` as a list
+    of plain strings, and the resulting AttributeError killed the whole job
+    mid-document. One malformed element must cost one edit, never the run.
+    """
+    out = []
+    if not isinstance(raw, list):
+        return out
+    for e in raw:
+        if isinstance(e, dict) and isinstance(e.get("anchor"), str) and e.get("anchor").strip():
+            e.setdefault("replacement", "")
+            e.setdefault("op", "replace")
+            e.setdefault("evidence", "")
+            out.append(e)
+    return out
+
+
+def _sane_terms(raw) -> list[dict]:
+    if not isinstance(raw, list):
+        return []
+    return [
+        t for t in raw
+        if isinstance(t, dict) and isinstance(t.get("term"), str)
+        and isinstance(t.get("means"), str)
+    ]
 
 
 def _norm(s: str) -> str:
