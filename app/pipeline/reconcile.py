@@ -139,3 +139,58 @@ def renumber_after_split(paragraphs: list[str], split_at: int) -> list[tuple[int
         n = int(m.group(2))
         out.append((idx, f"{n}.", f"{n + 1}."))
     return out
+
+
+# --------------------------------------------------------------------------- #
+# overlap consolidation
+# --------------------------------------------------------------------------- #
+_RANK = {"green": 0, "yellow": 1, "red": 2}
+
+
+def consolidate(edits: list[Edit], paragraphs: list[str]) -> list[Edit]:
+    """Ensure no two applied edits touch the same text.
+
+    Two readers, plus a tiebreaker allowed to split a cluster, can emit several
+    edits covering the same span. Applying all of them rewrites the same run
+    twice and corrupts it - measured end to end, applying every produced edit
+    left the document FURTHER from the correct answer than making no edits at
+    all. Where spans overlap, keep exactly one: best confidence first, then the
+    widest span (which usually carries the whole change rather than a fragment).
+
+    Non-textual ops (queries, footnotes, paragraph inserts) are passed through:
+    they add rather than rewrite, so they cannot collide.
+    """
+    passthrough = [e for e in edits if e.op in ("query", "footnote", "split_para", "insert_para")]
+    textual = [e for e in edits if e not in passthrough]
+
+    spans = []
+    for e in textual:
+        pi = next((i for i, t in enumerate(paragraphs) if e.anchor and e.anchor in t), None)
+        if pi is None:
+            spans.append((e, None))
+            continue
+        at = paragraphs[pi].index(e.anchor)
+        pre, old_core, _new, _sfx = minimal_span(e.anchor, e.replacement)
+        s = at + len(pre)
+        spans.append((e, (pi, s, s + max(len(old_core), 1))))
+
+    placed = [(e, sp) for e, sp in spans if sp]
+    unplaced = [e for e, sp in spans if not sp]
+
+    # best candidate first, so the winner of each overlap group is seen first
+    placed.sort(key=lambda x: (_RANK.get(x[0].confidence, 3), -(x[1][2] - x[1][1])))
+
+    kept: list[tuple[Edit, tuple]] = []
+    dropped = 0
+    for e, sp in placed:
+        clash = any(
+            k[1][0] == sp[0] and sp[1] < k[1][2] and k[1][1] < sp[2]
+            for k in kept
+        )
+        if clash:
+            dropped += 1
+            continue
+        kept.append((e, sp))
+
+    out = [e for e, _ in kept] + unplaced + passthrough
+    return out

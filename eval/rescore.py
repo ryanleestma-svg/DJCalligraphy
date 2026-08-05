@@ -29,8 +29,21 @@ from app.pipeline.reconcile import minimal_span      # noqa: E402
 from eval.make_fixtures import is_renumber           # noqa: E402
 
 
+QUOTES = str.maketrans({"\u201c": '"', "\u201d": '"', "\u2018": "'", "\u2019": "'",
+                        "\u2014": "-", "\u2013": "-"})
+
+
 def norm(s: str) -> str:
-    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+    return re.sub(r"[^a-z0-9]", "", (s or "").translate(QUOTES).lower())
+
+
+def effective(anchor: str, replacement: str) -> tuple[str, str]:
+    """(removed, added) - the actual change, independent of how much context
+    the edit chose to quote. Comparing raw replacement strings penalises a
+    correct edit purely for quoting a wider span, which is exactly the trap
+    this whole document keeps setting."""
+    _pre, old_core, new_core, _sfx = minimal_span(anchor or "", replacement or "")
+    return old_core, new_core
 
 
 def sim(a: str, b: str) -> float:
@@ -103,11 +116,15 @@ def main() -> int:
         for i, _, _ in cands:
             matched_p.add(i)
         # best candidate by added-text similarity
-        best = max(cands, key=lambda c: sim(c[2].get("replacement", ""), t["new"] or t["old"]))
-        combined_added = " ".join(c[2].get("replacement", "") for c in cands)
-        s_best = sim(best[2].get("replacement", ""), t["new"] or t["old"])
-        s_comb = sim(combined_added, t["new"] or t["old"])
-        s = max(s_best, s_comb)
+        t_removed, t_added = effective(t["old"], t["new"]) if t["old"] else ("", t["new"])
+        scores = []
+        for _i, _L, e in cands:
+            p_removed, p_added = effective(e.get("anchor", ""), e.get("replacement", ""))
+            scores.append(sim(p_added, t_added) if (t_added or p_added)
+                          else sim(p_removed, t_removed))
+        comb_added = " ".join(effective(e.get("anchor", ""), e.get("replacement", ""))[1]
+                              for _i, _L, e in cands)
+        s = max(max(scores), sim(comb_added, t_added))
         if s >= 0.90:
             exact += 1
         elif s >= 0.70:

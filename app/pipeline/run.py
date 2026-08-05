@@ -54,6 +54,12 @@ def process(
     all_edits = reconcile.apply_stet(all_edits)
     all_edits = reconcile.resolve_xrefs(all_edits)
     all_edits = reconcile.normalise(all_edits)
+    # Must run before anything is written: two edits over the same text rewrite
+    # the same run twice and corrupt it. Measured end to end, skipping this left
+    # the document further from correct than making no edits at all.
+    before = len(all_edits)
+    all_edits = reconcile.consolidate(all_edits, base_paras)
+    progress(f"Consolidated {before} -> {len(all_edits)} edits", 0.88)
 
     # Derive the renumbering cascade rather than reading 45 of them off the page.
     for e in [e for e in all_edits if e.op in ("split_para", "insert_para")]:
