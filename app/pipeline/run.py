@@ -63,6 +63,13 @@ def process(
 
     # Derive the renumbering cascade rather than reading 45 of them off the page.
     for e in [e for e in all_edits if e.op in ("split_para", "insert_para")]:
+        # The reader reports an anchor, never a paragraph index, so resolve it
+        # here. Guarding on para_hint alone meant this loop never ran and every
+        # list number downstream of an inserted paragraph stayed stale.
+        if e.para_hint is None and e.anchor:
+            e.para_hint = next(
+                (i for i, t in enumerate(base_paras) if e.anchor in t), None
+            )
         if e.para_hint is None:
             continue
         for idx, old, new in reconcile.renumber_after_split(base_paras, e.para_hint):

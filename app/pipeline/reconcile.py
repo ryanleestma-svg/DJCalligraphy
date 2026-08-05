@@ -49,12 +49,23 @@ def minimal_span(anchor: str, replacement: str) -> tuple[str, str, str, str]:
     return a[:i], a[i : len(a) - j], b[i : len(b) - j], a[len(a) - j :] if j else ""
 
 
+# A wholesale deletion of this much text is nearly always a reporting error -
+# a partial strike returned with an empty replacement - rather than a genuine
+# instruction to remove the passage. Measured on the reference document, 58
+# such edits existed and one of them deleted 155 characters where the reported
+# evidence described a 12-character strike.
+SUSPECT_DELETE_CHARS = 60
+
+
 def normalise(edits: list[Edit]) -> list[Edit]:
     out = []
     for e in edits:
         if e.op in ("query", "footnote", "split_para", "stet"):
             out.append(e)
             continue
+        if not (e.replacement or "").strip() and len(e.anchor) > SUSPECT_DELETE_CHARS:
+            # Apply it, but never silently: force it in front of the reviewer.
+            e.confidence = "red"
         _, old_core, new_core, _ = minimal_span(e.anchor, e.replacement)
         if not old_core and not new_core:
             continue  # no-op
@@ -177,8 +188,20 @@ def consolidate(edits: list[Edit], paragraphs: list[str]) -> list[Edit]:
     placed = [(e, sp) for e, sp in spans if sp]
     unplaced = [e for e, sp in spans if not sp]
 
-    # best candidate first, so the winner of each overlap group is seen first
-    placed.sort(key=lambda x: (_RANK.get(x[0].confidence, 3), -(x[1][2] - x[1][1])))
+    # Ordering decides which edit wins each overlap group.
+    #
+    # Edits that CARRY REPLACEMENT TEXT must outrank pure deletions. When Dave
+    # strikes a passage and writes its replacement in the margin, the readers
+    # report that as two overlapping edits - a delete and an insert. Dropping
+    # the one with the text turns a rewrite into a wipe: 20 paragraphs were
+    # being emptied that should merely have been reworded, every one of them
+    # green because both readers had agreed on each half.
+    def rank(item):
+        e, sp = item
+        has_text = 0 if (e.replacement or "").strip() else 1
+        return (has_text, _RANK.get(e.confidence, 3), -(sp[2] - sp[1]))
+
+    placed.sort(key=rank)
 
     kept: list[tuple[Edit, tuple]] = []
     dropped = 0

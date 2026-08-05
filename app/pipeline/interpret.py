@@ -49,7 +49,11 @@ normally the row label. Do NOT skip an edit because its text is short: the \
 dollar figures in the budget tables matter more than anything else on the page.
 * ONE edit per physical red mark. Do not split a single mark into several \
 edits, and do not merge two separate marks into one.
-* `replacement` is the whole anchor span rewritten as he wants it.
+* `replacement` is the WHOLE anchor span as it should end up, written out in \
+full including every word that survives. Striking three words out of a long \
+sentence means `replacement` is that sentence minus those three words - NOT an \
+empty string. An empty `replacement` deletes the entire anchor, so use it only \
+when he has struck the whole span.
 * Do NOT silently fix his grammar. If the sentence does not read correctly as \
 marked, transcribe what is actually written and raise a `query` alongside it.
 * A `[?]` mark is a question to the author, not an edit - use op `query`.

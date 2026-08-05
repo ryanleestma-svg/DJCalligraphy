@@ -74,9 +74,12 @@ EDIT_SCHEMA = {
                     "replacement": {
                         "type": "string",
                         "description": (
-                            "The full anchor span rewritten as Dave wants it. For "
-                            "'delete' this is the anchor with the struck words "
-                            "removed. For 'query' this is the question text."
+                            "REQUIRED. The complete text the anchor span becomes, "
+                            "written out in full. If only part of the anchor is "
+                            "struck, this must still contain ALL the surviving "
+                            "words - copy them through verbatim. Leave it empty "
+                            "ONLY when the entire anchor is struck out. "
+                            "For 'query' this is the question text."
                         ),
                     },
                     "evidence": {
