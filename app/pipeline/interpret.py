@@ -127,7 +127,7 @@ def _span(e: dict, base_text: str) -> tuple[int, int] | None:
     return (at, at + len(e.get("anchor", "")))
 
 
-def _cluster(a_edits, b_edits, base_text, slack: int = 40):
+def _cluster(a_edits, b_edits, base_text, slack: int = 0):
     """Group both readers' edits into one cluster per physical mark.
 
     Clustering is by OVERLAP OF POSITION IN THE BASE DOCUMENT, not by similarity
@@ -137,6 +137,13 @@ def _cluster(a_edits, b_edits, base_text, slack: int = 40):
     to the tiebreaker as a separate edit. On the first full run that produced
     2.22 edits per real edit and left 194 of 292 marked yellow, because every
     unpaired singleton counts as a disagreement.
+
+    Clustering requires spans to genuinely OVERLAP, not merely sit near each
+    other. This is single-linkage clustering, so any positive slack chains
+    transitively: with 40 characters of slack, six distinct marks 30 characters
+    apart collapse into one cluster. Measured directly - the dense page 2 fell
+    from 29 reported edits to 3, against 17 real ones. Two readings of the same
+    mark overlap by construction, so slack is not needed.
 
     Returns [(a_items, b_items, span)].
     """
@@ -179,10 +186,11 @@ what is really one mark, or be empty if that reader saw nothing.
 Reader A: {a}
 Reader B: {b}
 
-Return exactly ONE edit describing what is actually written there. If the two \
-lists are fragments of a single mark, consolidate them into that one edit. If \
-you cannot tell what he wrote with reasonable certainty, return op `query` with \
-a `replacement` stating plainly what needs checking - do not guess.
+Return one edit per DISTINCT physical red mark in that region - normally one. \
+If the two lists are fragments of a single mark, consolidate them into one \
+edit. If the region genuinely holds two separate marks, return both. If you \
+cannot tell what he wrote with reasonable certainty, return op `query` with a \
+`replacement` stating plainly what needs checking - do not guess.
 """
 
 
@@ -194,10 +202,9 @@ def _tiebreak(page_png: bytes, base_text: str, glossary: str, a_items, b_items):
         b=json.dumps(b_items, ensure_ascii=False) if b_items else "(found no edit here)",
     )
     edits, _ = _call(page_png, base_text, glossary, lens)
-    if not edits:
-        return None, "red"
-    e = edits[0]
-    return e, ("red" if e.get("op") == "query" else "yellow")
+    # The tiebreaker may legitimately split a cluster that holds two marks,
+    # so take everything it returns rather than only the first edit.
+    return [(e, "red" if e.get("op") == "query" else "yellow") for e in edits]
 
 
 def read_page(page_png: bytes, base_text: str, glossary: str, page_no: int) -> tuple[list[Edit], list[dict]]:
@@ -232,8 +239,7 @@ def read_page(page_png: bytes, base_text: str, glossary: str, page_no: int) -> t
                 for a, b in contested
             ]
             for f in futures:
-                src, conf = f.result()
-                if src is not None:
+                for src, conf in f.result():
                     settled.append((src, conf, ["A", "B", "T"]))
 
     out: list[Edit] = []
